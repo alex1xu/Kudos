@@ -4,7 +4,7 @@
 
 ![Static Badge](https://img.shields.io/badge/Users-100-purple)
 ![Static Badge](https://img.shields.io/badge/Organizations-15-yellow)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5b74f79ee2904bfc92cc90fdbfdd3421)](https://app.codacy.com/gh/alex1xu/VapeVeritas-Twitter_E-cig_Surveillance/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4f72807935c945cd9bed3ffb2f8bb960)](https://app.codacy.com/gh/alex1xu/KudosConnect/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)
 [![Website fakesite.invalid](https://img.shields.io/website-up-down-green-red/http/fakesite.invalid.svg)](http://fakesite.invalid/)
 
