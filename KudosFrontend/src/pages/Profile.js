@@ -116,7 +116,6 @@ function Profile() {
           language: "en",
           networks: ["wechat", "whatsapp", "facebook", "email"],
           radius: 10,
-          show_total: true,
           size: 48,
           top: 100,
         }}

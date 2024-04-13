@@ -72,7 +72,7 @@ function ApplicationPanel(props) {
             application_id: props.application.id,
           };
 
-        await createNewReview(new_review).then(async (res) => {
+        await createNewReview(new_review).then(async () => {
           navigate(0);
           return null;
         });

@@ -19,10 +19,6 @@ import { UserContext } from "../components/UserContext";
 export function Navbar() {
   const { user, setUser } = useContext(UserContext);
 
-  useEffect(() => {}, []);
-
-  const width = window.innerWidth > 0 ? window.innerWidth : window.screen.width;
-
   return (
     <nav className="navbar">
       <ul className="navbar-nav">

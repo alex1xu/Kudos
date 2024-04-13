@@ -177,7 +177,7 @@ export function unknownError(message) {
   });
 }
 
-export function forceLogout(message) {
+export function forceLogout() {
   showAlert({
     icon: "error",
     title: "Session Expired",
@@ -185,7 +185,7 @@ export function forceLogout(message) {
     timer: 2000,
     onClose: () => {
       logoutCurrentUser();
-      window.location.href = "/login";
+      window.location.href = escape("/login");
     },
   });
 }
