@@ -1,8 +1,7 @@
-from flask import Flask, request, jsonify, Blueprint, session
-from . import db, ma, app, processImage, s3
-import json
+from flask import request, jsonify, Blueprint, session
+from . import db, ma, processImage, s3
 from sqlalchemy import exc
-from .models import UserModel, ListingModel
+from .models import ListingModel
 from datetime import datetime
 import uuid
 import os
@@ -131,30 +130,30 @@ def search_listings():
     except exc.SQLAlchemyError:
         return {'message': "Unknown error"}, 500
 
-@listing_routes.route('/user/<id>', methods=['GET'])
-def get_listing_requester_id(id):
+@listing_routes.route('/user/<uid>', methods=['GET'])
+def get_listing_requester_id(uid):
     try:
-        listings = db.session.query(ListingModel).filter(ListingModel.requester_id == id)
+        listings = db.session.query(ListingModel).filter(ListingModel.requester_id == uid)
         result = listings_schema.dump(listings)
         return jsonify(result), 200
     except exc.SQLAlchemyError:
         return {'message': "Unknown error"}, 500
 
-@listing_routes.route('/<id>', methods=['GET'])
-def get_listing(id):
+@listing_routes.route('/<lid>', methods=['GET'])
+def get_listing(lid):
     try:
-        listing = ListingModel.query.get(id)
+        listing = ListingModel.query.get(lid)
         return listing_schema.jsonify(listing), 200
     except exc.SQLAlchemyError:
         return {'message': "Unknown error"}, 500
 
-@listing_routes.route('/<id>', methods=['PUT'])
-def update_listing(id):
+@listing_routes.route('/<lid>', methods=['PUT'])
+def update_listing(lid):
     try:
         if 'session' not in session:
             return jsonify({'message': 'Unauthorized'}), 401
 
-        listing = ListingModel.query.get(id)
+        listing = ListingModel.query.get(lid)
         listing_dict = {key: request.form[key] for key in request.form if request.form[key] != 'undefined'}
 
         if int(listing_dict['listing_type']) == 3:
@@ -204,13 +203,13 @@ def update_listing(id):
     except exc.SQLAlchemyError:
         return {'message': "Unknown error"}, 500
 
-@listing_routes.route('/<id>', methods=['DELETE'])
-def delete_listing(id):
+@listing_routes.route('/<lid>', methods=['DELETE'])
+def delete_listing(lid):
     try:
         if 'session' not in session:
             return jsonify({'message': 'Unauthorized'}), 401
 
-        listing = ListingModel.query.get(id)
+        listing = ListingModel.query.get(lid)
         db.session.delete(listing)
         db.session.commit()
         return listing_schema.jsonify(listing), 200

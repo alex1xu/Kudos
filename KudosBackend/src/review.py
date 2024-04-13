@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, Blueprint,session
+from flask import request, jsonify, Blueprint,session
 from . import db,ma
 import json
 from sqlalchemy import exc
@@ -79,22 +79,22 @@ def get_all_reviews():
     result = reviews_schema.dump(all_reviews)
     
     return jsonify(result),200
-  except exc.SQLAlchemyError as e:
+  except exc.SQLAlchemyError:
     return {'message': 'Unknown Error'},500
 
-@review_routes.route('/<id>', methods=['GET'])
-def get_review(id):
+@review_routes.route('/<rid>', methods=['GET'])
+def get_review(rid):
   try:
-    review = ReviewModel.query.get(id)
+    review = ReviewModel.query.get(rid)
 
     return review_schema.jsonify(review),200
   except exc.SQLAlchemyError as e:
     return {'message': 'Unknown Error'},500
 
-@review_routes.route('/application/<id>', methods=['GET'])
-def get_review_application_id(id):
+@review_routes.route('/application/<aid>', methods=['GET'])
+def get_review_application_id(aid):
   try:
-    reviews = db.session.query(ReviewModel).filter(ReviewModel.application_id==id)
+    reviews = db.session.query(ReviewModel).filter(ReviewModel.application_id==aid)
 
     result = reviews_schema.dump(reviews)
 
@@ -102,10 +102,10 @@ def get_review_application_id(id):
   except exc.SQLAlchemyError as e:
     return {'message': 'Unknown Error'},500
 
-@review_routes.route('/reciever/<id>', methods=['GET'])
-def get_review_reciever_id(id):
+@review_routes.route('/reciever/<uid>', methods=['GET'])
+def get_review_reciever_id(uid):
   try:
-    reviews = db.session.query(ReviewModel).filter(ReviewModel.reciever_id==id)
+    reviews = db.session.query(ReviewModel).filter(ReviewModel.reciever_id==uid)
 
     result = reviews_schema.dump(reviews)
 
@@ -113,10 +113,10 @@ def get_review_reciever_id(id):
   except exc.SQLAlchemyError as e:
     return {'message': 'Unknown Error'},500
   
-@review_routes.route('/reviewer/<id>', methods=['GET'])
-def get_review_reviewer_id(id):
+@review_routes.route('/reviewer/<uid>', methods=['GET'])
+def get_review_reviewer_id(uid):
   try:
-    reviews = db.session.query(ReviewModel).filter(ReviewModel.reviewer_id==id)
+    reviews = db.session.query(ReviewModel).filter(ReviewModel.reviewer_id==uid)
 
     result = reviews_schema.dump(reviews)
 
@@ -124,12 +124,12 @@ def get_review_reviewer_id(id):
   except exc.SQLAlchemyError as e:
     return {'message': 'Unknown Error'},500
 
-@review_routes.route('/<id>', methods=['PUT'])
-def update_review(id):
+@review_routes.route('/<rid>', methods=['PUT'])
+def update_review(rid):
   try:
     if 'session' not in session:
       return jsonify({'message':'Unauthorized'}),401
-    review = ReviewModel.query.get(id)
+    review = ReviewModel.query.get(rid)
     json_dict = json.loads(json.dumps(request.json))
 
     for key in json_dict:
@@ -141,12 +141,12 @@ def update_review(id):
   except exc.SQLAlchemyError as e:
     return {'message': 'Unknown Error'},500
 
-@review_routes.route('/<id>', methods=['DELETE'])
-def delete_review(id):
+@review_routes.route('/<rid>', methods=['DELETE'])
+def delete_review(rid):
   try:
     if 'session' not in session:
       return jsonify({'message':'Unauthorized'}),401
-    review = ReviewModel.query.get(id)
+    review = ReviewModel.query.get(rid)
     db.session.delete(review)
     db.session.commit()
 

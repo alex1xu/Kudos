@@ -1,19 +1,16 @@
 from flask import (
-    Flask,
     request,
     jsonify,
     Blueprint,
     session,
 )
 from . import db, ma, app, processImage, s3
-import json
 from sqlalchemy import exc, or_
 from .models import UserModel, ListingModel
 import uuid
 import os
 import boto3
 from botocore.client import Config
-from random import random
 
 user_routes = Blueprint("user", __name__)
 
@@ -67,7 +64,7 @@ def get_image(filename):
             Params={"Bucket": os.environ.get("S3_BUCKET"), "Key": filename},
             ExpiresIn=600,
         )}, 200
-    except Exception as e:
+    except Exception:
         return {"message": "Unknown Error"}, 500
 
 
@@ -160,10 +157,10 @@ def get_verified_users():
         return {"message": "Unknown Error"}, 500
 
 
-@user_routes.route("/<id>", methods=["GET"])
-def get_user(id):
+@user_routes.route("/<uid>", methods=["GET"])
+def get_user(uid):
     try:
-        user = UserModel.query.get(id)
+        user = UserModel.query.get(uid)
         return user_schema.jsonify(user), 200
     except Exception as e:
         return {"message": "Unknown Error"}, 500
@@ -178,13 +175,13 @@ def get_user_username(username):
         return {"message": "Unknown Error"}, 500
 
 
-@user_routes.route("/<id>", methods=["PUT"])
-def update_user(id):
+@user_routes.route("/<uid>", methods=["PUT"])
+def update_user(uid):
     try:
         if "session" not in session:
             return jsonify({"message": "Unauthorized"}), 401
 
-        user = UserModel.query.get(id)
+        user = UserModel.query.get(uid)
         for key, value in request.form.items():
             if value != "undefined":
                 if key == "kudos":
@@ -226,13 +223,13 @@ def update_user(id):
         return {"message": "Unknown Error"}, 500
 
 
-@user_routes.route("/<id>", methods=["DELETE"])
-def delete_user(id):
+@user_routes.route("/<uid>", methods=["DELETE"])
+def delete_user(uid):
     try:
         if "session" not in session:
             return jsonify({"message": "Unauthorized"}), 401
 
-        user = UserModel.query.get(id)
+        user = UserModel.query.get(uid)
         db.session.delete(user)
         db.session.commit()
         return user_schema.jsonify(user), 200

@@ -10,7 +10,7 @@ from flask_migrate import Migrate
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from PIL import Image
-from sqlalchemy import MetaData, create_engine
+from sqlalchemy import MetaData
 import boto3
 
 load_dotenv()
@@ -84,5 +84,5 @@ def process_image(image):
         buf.seek(0)
 
         return buf
-    except Exception as e:
+    except Exception:
         abort(404)
