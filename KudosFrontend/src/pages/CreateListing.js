@@ -36,7 +36,7 @@ function CreateListing() {
       current_user.account_type != roleMap.CLUB &&
       current_user.account_type != roleMap.ORGANIZATION &&
       current_user.account_type != roleMap.ADMIN &&
-      props.type == 3
+      props.type === 3
     )
       navigate("/login");
     else asyncRun();
@@ -62,7 +62,7 @@ function CreateListing() {
     };
 
     generalLoading();
-    await createNewListing(listing).then((res) => {
+    await createNewListing(listing).then(() => {
       navigate("/explore");
       navigate(0);
       return true;
@@ -119,7 +119,7 @@ function CreateListing() {
             </p>
           </details>
         </div>
-        {props.type == 0 ? (
+        {props.type === 0 ? (
           <div>
             <details>
               <summary style={{ textAlign: "left" }}>
@@ -137,7 +137,7 @@ function CreateListing() {
               </p>
             </details>
           </div>
-        ) : props.type == 1 ? (
+        ) : props.type === 1 ? (
           <div>
             <details>
               <summary style={{ textAlign: "left" }}>
@@ -233,7 +233,6 @@ function CreateListing() {
               getInputProps,
               suggestions,
               getSuggestionItemProps,
-              loading,
             }) => (
               <div>
                 <input

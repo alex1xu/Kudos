@@ -5,7 +5,7 @@ import ListingPanel from "../components/ListingPanel";
 import { ReactComponent as NextIcon } from "../icons/right.svg";
 import { Tooltip } from "react-tooltip";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, FreeMode } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { FaHandshake, FaShapes, FaUsers } from "react-icons/fa";
 import { BsAwardFill, BsPinMapFill } from "react-icons/bs";
 import { getVerifiedUserList } from "../api/user.js";

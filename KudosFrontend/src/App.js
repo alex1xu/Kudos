@@ -13,7 +13,7 @@ import Settings from "./pages/Settings";
 import Maintenence from "./pages/Maintenence";
 import Admin from "./pages/Admin";
 import { UserContext } from "./components/UserContext";
-import { generalError, getCurrentUser } from "./utility.js";
+import { getCurrentUser } from "./utility.js";
 
 function App() {
   const [user, setUser] = useState(null);

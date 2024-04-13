@@ -57,7 +57,7 @@ function EditListing() {
       current_user.account_type != roleMap.CLUB &&
       current_user.account_type != roleMap.ORGANIZATION &&
       current_user.account_type != roleMap.ADMIN &&
-      props.type == 3
+      props.type === 3
     )
       navigate("/login");
     else asyncRun();
@@ -83,7 +83,7 @@ function EditListing() {
     };
 
     generalLoading();
-    await editListing(edited_listing, props.id).then((res) => {
+    await editListing(edited_listing, props.id).then(() => {
       navigate("/listing/" + props.id);
       navigate(0);
       return true;
@@ -144,7 +144,6 @@ function EditListing() {
               getInputProps,
               suggestions,
               getSuggestionItemProps,
-              loading,
             }) => (
               <div>
                 <input

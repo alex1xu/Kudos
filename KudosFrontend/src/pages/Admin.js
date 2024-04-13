@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { generalLoading, getCurrentUser, roleMap } from "../utility.js";
+import { getCurrentUser, roleMap } from "../utility.js";
 import { updateUserProfile, checkSession, getUserList } from "../api/user.js";
 import { UserContext } from "../components/UserContext";
 import UserCard from "../components/UserCard.js";
@@ -26,7 +26,7 @@ function Admin() {
 
   useEffect(() => {
     if (!current_user) navigate("/login");
-    else if (current_user.account_type != 3) navigate("/login");
+    else if (current_user.account_type !== 3) navigate("/login");
     else asyncRun();
 
     document.title = "Admin | Kudos";

@@ -5,14 +5,13 @@ import {
   getStringTime,
   categoryMap,
   convertToDisplayDT,
-  recentTime,
   confirmDelete,
   confirmReport,
   getCurrentUser,
   roleMap,
 } from "../utility.js";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import UserCard from "../components/UserCard";
 import { AiOutlineClockCircle, AiOutlineTag } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
@@ -239,7 +238,7 @@ function ListingPanel(props) {
                   <p className="listing-panel-info-container">
                     <GiftIcon className="listing-panel-icon red-outline" />
                     Earn {props.listing.volunteer_hours} volunteer hour
-                    {(props.listing.volunteer_hours == 0 ||
+                    {(props.listing.volunteer_hours === 0 ||
                       props.listing.volunteer_hours > 1) &&
                       "s"}
                   </p>
