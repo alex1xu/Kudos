@@ -1,6 +1,6 @@
 ![kudos logo](https://github.com/alex1xu/KudosConnect/assets/65417426/747b281e-c1ac-4713-a904-e7dc6dfdb4c1)
 
-> KudosConnect is a community hub that connects students with local volunteer opportunities. Local organizations, school clubs, and student freelancers use KudosConnect to communicate events, volunteer opportunities, and services.
+> Kudos is a community hub that connects students with local volunteer opportunities. Local organizations, school clubs, and student freelancers use KudosConnect to communicate events, volunteer opportunities, and services.
 
 ![Static Badge](https://img.shields.io/badge/Users-100-purple)
 ![Static Badge](https://img.shields.io/badge/Organizations-15-yellow)
